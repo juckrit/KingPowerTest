@@ -1,4 +1,4 @@
-package com.example.kingpowertest.presentation
+package com.example.kingpowertest.presentation.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
