@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:padding="16dp"
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
@@ -19,6 +20,9 @@
         android:background="@color/cardview_dark_background"
         android:textColor="@color/cardview_light_background"
         android:textSize="24sp"
+        android:paddingStart="8dp"
+        android:maxLines="1"
+        android:ellipsize="end"
         tools:text="name" />
 
 

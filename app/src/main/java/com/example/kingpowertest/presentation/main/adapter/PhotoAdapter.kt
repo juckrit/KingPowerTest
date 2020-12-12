@@ -38,7 +38,7 @@ class PhotoAdapter :
 
         fun binding(model:PhotoModel){
             Glide.with(binding.root.context)
-                .load(model.url)
+                .load(model.thumbnailUrl)
                 .error(R.color.colorBlack)
                 .placeholder(R.color.colorPrimary)
                 .into(binding.iv)
