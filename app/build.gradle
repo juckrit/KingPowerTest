@@ -87,6 +87,16 @@ dependencies {
     // optional - Kotlin Extensions and Coroutines support for Room
     implementation "androidx.room:room-ktx:$room_version"
 
+    //Koin
+    implementation 'org.koin:koin-android:2.2.0-rc-2'
+    implementation 'org.koin:koin-androidx-scope:2.2.0-rc-2'
+    implementation 'org.koin:koin-androidx-viewmodel:2.2.0-rc-2'
+    // or Koin for Android Fragment Factory (unstable version)
+    implementation "org.koin:koin-androidx-fragment:2.2.0-rc-2"
+    // Koin AndroidX Experimental features
+    implementation "org.koin:koin-android-ext:2.2.0-rc-2"
+    testImplementation "org.koin:koin-test:2.2.0-rc-2"
+
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.2'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.2'
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
@@ -101,6 +111,7 @@ dependencies {
     testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.4.0-M1'
     testImplementation "com.google.truth:truth:1.1"
     testImplementation 'androidx.test.ext:junit:1.1.1'
+    testImplementation 'org.mockito:mockito-core:3.0.0'
 
     androidTestImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
