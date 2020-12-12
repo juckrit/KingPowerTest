@@ -1,6 +1,11 @@
 package com.example.kingpowertest.data.api
 
+import com.example.kingpowertest.BuildConfig.BASE_URL
 import com.example.kingpowertest.data.model.PhotoModel
+import com.google.gson.GsonBuilder
+import okhttp3.OkHttpClient
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Path
 
@@ -8,5 +13,19 @@ interface KingPowerService {
 
     @GET("{albumId}/photos")
     suspend fun getPhotos(@Path("albumId") albumId: Int): List<PhotoModel>
+
+    companion object {
+        val instance: KingPowerService by lazy {
+            Retrofit.Builder().baseUrl(BASE_URL)
+                .client(client)
+                .addConverterFactory(GsonConverterFactory.create(GsonBuilder().create()))
+                .build()
+                .create(KingPowerService::class.java)
+        }
+
+        private val client = OkHttpClient().newBuilder()
+//            .addInterceptor(TokenExpiredInterceptor())
+            .build()
+    }
 
 }

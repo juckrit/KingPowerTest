@@ -1,4 +1,4 @@
-package com.example.kingpowertest.presentation.main
+package com.example.kingpowertest.presentation.main.viewmodel
 
 import androidx.lifecycle.ViewModel
 
