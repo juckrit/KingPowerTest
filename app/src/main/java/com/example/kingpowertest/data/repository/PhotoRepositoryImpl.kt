@@ -27,6 +27,7 @@ class PhotoRepositoryImpl(
     }
 
     override suspend fun savePhotos(photos: List<PhotoRoomModel>) {
+        photoLocalDataSource.clearAll()
         photoLocalDataSource.savePhotosToDB(photos)
     }
 

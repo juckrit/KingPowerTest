@@ -2,9 +2,11 @@ package com.example.kingpowertest.data.repository
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.example.kingpowertest.data.model.PhotoNetworkModel
 import com.example.kingpowertest.data.model.PhotoRoomModel
 import com.example.kingpowertest.data.repository.datasource.PhotoLocalDataSource
 import com.example.kingpowertest.data.repository.datasource.PhotoRemoteDataSource
+import com.google.common.truth.Truth
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Rule
@@ -52,6 +54,22 @@ class PhotoRepositoryImplTest {
             photoRepositoryImpl.getPhotos(1)
             Mockito.verify(mockPhotoRemoteDataSource, Mockito.times(0)).getPhotos(1)
 
+        }
+    }
+
+    @Test
+    fun savePhotoCorrectly(){
+        runBlocking {
+            val expectedNetworkResult =  listOf(
+                PhotoNetworkModel(1, 1, "title1", "url1", "t_url1")
+            )
+            val expectedRoomResult =  listOf(
+                PhotoRoomModel(1, 1, "title1", "url1", "t_url1")
+            )
+            Mockito.`when`(mockPhotoLocalDataSource.getPhotosFromDB()).thenReturn(emptyList())
+            Mockito.`when`(mockPhotoRemoteDataSource.getPhotos(1)).thenReturn(expectedNetworkResult)
+            val result = photoRepositoryImpl.getPhotos(1)
+            Truth.assertThat(result).isEqualTo(expectedNetworkResult)
         }
     }
 }
