@@ -23,18 +23,19 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 val appModule = module {
 
-    single(named(DI_NAME_KingPowerService)) {
-        val client = OkHttpClient().newBuilder()
-//            .addInterceptor(TokenExpiredInterceptor())
-            .build()
-        val instance: KingPowerService by lazy {
-            Retrofit.Builder().baseUrl(BuildConfig.BASE_URL)
-                .client(client)
-                .addConverterFactory(GsonConverterFactory.create(GsonBuilder().create()))
-                .build()
-                .create(KingPowerService::class.java)
-        }
-        instance
+    single<KingPowerService>(named(DI_NAME_KingPowerService)) {
+//        val client = OkHttpClient().newBuilder()
+////            .addInterceptor(TokenExpiredInterceptor())
+//            .build()
+//        val instance: KingPowerService by lazy {
+//            Retrofit.Builder().baseUrl(BuildConfig.BASE_URL)
+//                .client(client)
+//                .addConverterFactory(GsonConverterFactory.create(GsonBuilder().create()))
+//                .build()
+//                .create(KingPowerService::class.java)
+//        }
+//        instance
+        KingPowerService.instance
     }
 
     single<PhotoRemoteDataSource>(named(DI_NAME_PhotoRemoteDataSourceImpl)) {

@@ -72,4 +72,6 @@ class PhotoRepositoryImplTest {
             Truth.assertThat(result).isEqualTo(expectedRoomResult)
         }
     }
+
+
 }
