@@ -4,6 +4,7 @@ import android.graphics.drawable.Drawable
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
@@ -13,6 +14,7 @@ import com.bumptech.glide.request.target.Target
 import com.example.kingpowertest.R
 import com.example.kingpowertest.data.model.PhotoModel
 import com.example.kingpowertest.databinding.ItemListPhotoBinding
+import com.example.kingpowertest.presentation.main.fragment.MainFragmentDirections
 
 class PhotoAdapter :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -80,6 +82,12 @@ class PhotoAdapter :
                 .into(binding.iv)
 
             binding.tv.text = model.title
+            binding.root.setOnClickListener {
+                val action = MainFragmentDirections.actionMainFragmentToDetailFragment(
+                    model
+                )
+                it.findNavController().navigate(action)
+            }
         }
     }
 }
