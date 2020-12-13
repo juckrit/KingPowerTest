@@ -16,13 +16,13 @@ class PhotoRepositoryImpl(
 
     override suspend fun getPhotos(albumId: Int): List<PhotoNetworkModel> {
         val result = getPhotosFromDB(albumId)
-        val photoRoomModels = result.map {
-            PhotoRoomModel(it.photoId, it.albumId, it.title, it.url, it.thumbnailUrl)
-        }
+//        val photoRoomModels = result.map {
+//            PhotoRoomModel(it.photoId, 54321, it.title, it.url, it.thumbnailUrl)
+//        }
         val photoNetworkModels = result.map {
             PhotoNetworkModel(it.photoId, it.albumId, it.title, it.url, it.thumbnailUrl)
         }
-        savePhotos(photoRoomModels)
+//        savePhotos(photoRoomModels)
         return photoNetworkModels
     }
 

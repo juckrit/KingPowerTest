@@ -68,8 +68,8 @@ class PhotoRepositoryImplTest {
             )
             Mockito.`when`(mockPhotoLocalDataSource.getPhotosFromDB()).thenReturn(emptyList())
             Mockito.`when`(mockPhotoRemoteDataSource.getPhotos(1)).thenReturn(expectedNetworkResult)
-            val result = photoRepositoryImpl.getPhotos(1)
-            Truth.assertThat(result).isEqualTo(expectedNetworkResult)
+            val result = photoRepositoryImpl.getPhotosFromDB(1)
+            Truth.assertThat(result).isEqualTo(expectedRoomResult)
         }
     }
 }
