@@ -8,5 +8,6 @@ class GetPhotoUseCase(
 ) {
     suspend fun execute(albumId:Int):List<PhotoNetworkModel>{
         return photoRepository.getPhotos(albumId)
+//        return emptyList()
     }
 }

@@ -17,15 +17,15 @@ import org.mockito.Mockito
 class GetPhotoUseCaseTest {
 
     private lateinit var getPhotoUseCase: GetPhotoUseCase
-    private lateinit var photoRepository: PhotoRepository
+    private lateinit var mockPhotoRepository: PhotoRepository
 
     @get:Rule
     val instantTaskExecutorRule = InstantTaskExecutorRule()
 
     @Before
     fun setUp() {
-        photoRepository = Mockito.mock(PhotoRepository::class.java)
-        getPhotoUseCase = GetPhotoUseCase(photoRepository)
+        mockPhotoRepository = Mockito.mock(PhotoRepository::class.java)
+        getPhotoUseCase = GetPhotoUseCase(mockPhotoRepository)
     }
 
     //check getPhotos inside PhotoRepository was called
@@ -33,7 +33,7 @@ class GetPhotoUseCaseTest {
     fun photoRepository_getPhotos_was_called() {
         runBlocking {
             getPhotoUseCase.execute(1)
-            Mockito.verify(photoRepository, Mockito.times(1)).getPhotos(1);
+            Mockito.verify(mockPhotoRepository, Mockito.times(1)).getPhotos(1);
         }
     }
 
@@ -45,7 +45,7 @@ class GetPhotoUseCaseTest {
                 PhotoNetworkModel(1, 1, "title1", "url1", "t_url1"),
                 PhotoNetworkModel(1, 2, "title2", "url2", "t_url2")
             )
-            Mockito.`when`(photoRepository.getPhotos(1)).thenReturn(expectedResult)
+            Mockito.`when`(mockPhotoRepository.getPhotos(1)).thenReturn(expectedResult)
             val result = getPhotoUseCase.execute(1)
             assertNotNull(result); //check if the object is != null
             assertEquals(expectedResult, result);
