@@ -1,6 +1,7 @@
 package com.example.kingpowertest.data.repository
 
 import com.example.kingpowertest.data.model.PhotoNetworkModel
+import com.example.kingpowertest.data.model.PhotoRoomModel
 import com.example.kingpowertest.domain.repository.PhotoRepository
 
 class FakePhotoRepository:PhotoRepository {
@@ -15,5 +16,9 @@ class FakePhotoRepository:PhotoRepository {
 
     override suspend fun getPhotos(albumId: Int): List<PhotoNetworkModel> {
         return photos
+    }
+
+    override suspend fun savePhotos(photos: List<PhotoRoomModel>) {
+        TODO("Not yet implemented")
     }
 }
