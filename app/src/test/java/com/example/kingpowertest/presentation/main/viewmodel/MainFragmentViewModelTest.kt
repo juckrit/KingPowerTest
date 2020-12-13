@@ -1,0 +1,49 @@
+package com.example.kingpowertest.presentation.main.viewmodel
+
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.example.kingpowertest.data.model.ResultWrapper
+import com.example.kingpowertest.data.repository.FakePhotoRepository
+import com.example.kingpowertest.domain.usecase.GetPhotoUseCase
+import com.example.kingpowertest.getOrAwaitValue
+import com.example.kingpowertest.presentation.main.mapper.PhotoNetworkModelMapper
+import com.example.kingpowertest.presentation.main.model.PhotoPresentationModel
+import com.google.common.truth.Truth
+import org.junit.Before
+import org.junit.Rule
+import org.junit.Test
+import org.junit.runner.RunWith
+
+@RunWith(AndroidJUnit4::class)
+class MainFragmentViewModelTest {
+    private lateinit var viewModel: MainFragmentViewModel
+
+    @get:Rule
+    val instantTaskExecutorRule = InstantTaskExecutorRule()
+
+    @Before
+    fun setUp() {
+        val fakeRepository = FakePhotoRepository()
+        val getPhotoUseCase = GetPhotoUseCase(fakeRepository)
+        val mapper = PhotoNetworkModelMapper()
+        viewModel = MainFragmentViewModel(getPhotoUseCase, mapper)
+    }
+
+    @Test
+    fun getPhotos_ReturnCurrentList() {
+        val photos = mutableListOf<PhotoPresentationModel>()
+        photos.add(PhotoPresentationModel("url1", "t_url1", "title1"))
+        photos.add(PhotoPresentationModel("url2", "t_url2", "title2"))
+
+        viewModel.getPhotoByAlbumId(1)
+        val currentList = viewModel.getPhotoListLiveData().getOrAwaitValue()
+        when (currentList) {
+            is ResultWrapper.Success -> {
+                Truth.assertThat((currentList.value)).isEqualTo(photos)
+            }
+            is ResultWrapper.Error -> {
+
+            }
+        }
+    }
+}
