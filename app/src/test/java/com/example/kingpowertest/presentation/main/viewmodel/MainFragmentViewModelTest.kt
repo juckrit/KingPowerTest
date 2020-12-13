@@ -5,7 +5,6 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.example.kingpowertest.FAILURE
 import com.example.kingpowertest.data.model.PhotoNetworkModel
 import com.example.kingpowertest.data.model.ResultWrapper
-import com.example.kingpowertest.data.repository.FakePhotoRepository
 import com.example.kingpowertest.domain.repository.PhotoRepository
 import com.example.kingpowertest.domain.usecase.GetPhotoUseCase
 import com.example.kingpowertest.getOrAwaitValue

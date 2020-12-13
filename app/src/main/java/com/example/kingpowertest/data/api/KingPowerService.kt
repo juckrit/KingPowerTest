@@ -14,18 +14,4 @@ interface KingPowerService {
     @GET("{albumId}/photos")
     suspend fun getPhotos(@Path("albumId") albumId: Int): List<PhotoNetworkModel>
 
-    companion object {
-        val instance: KingPowerService by lazy {
-            Retrofit.Builder().baseUrl(BASE_URL)
-                .client(client)
-                .addConverterFactory(GsonConverterFactory.create(GsonBuilder().create()))
-                .build()
-                .create(KingPowerService::class.java)
-        }
-
-        private val client = OkHttpClient().newBuilder()
-//            .addInterceptor(TokenExpiredInterceptor())
-            .build()
-    }
-
 }
