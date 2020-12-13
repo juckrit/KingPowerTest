@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class PhotoModel(
+data class PhotoNetworkModel(
     @SerializedName("albumId") @Expose val albumId: Int,
     @SerializedName("id") @Expose val photoId: Int,
     @SerializedName("title") @Expose val title: String,

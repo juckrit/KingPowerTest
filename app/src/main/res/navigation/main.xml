@@ -25,6 +25,6 @@
         tools:layout="@layout/detail_fragment" >
         <argument
             android:name="photoModel"
-            app:argType="com.example.kingpowertest.data.model.PhotoModel" />
+            app:argType="com.example.kingpowertest.presentation.main.model.PhotoPresentationModel" />
     </fragment>
 </navigation>

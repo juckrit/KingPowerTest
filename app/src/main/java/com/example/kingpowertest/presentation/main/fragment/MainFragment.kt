@@ -8,10 +8,11 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.kingpowertest.data.model.PhotoModel
+import com.example.kingpowertest.data.model.PhotoNetworkModel
 import com.example.kingpowertest.data.model.ResultWrapper
 import com.example.kingpowertest.databinding.MainFragmentBinding
 import com.example.kingpowertest.presentation.main.adapter.PhotoAdapter
+import com.example.kingpowertest.presentation.main.model.PhotoPresentationModel
 import com.example.kingpowertest.presentation.main.viewmodel.MainFragmentViewModel
 import org.koin.android.ext.android.inject
 
@@ -68,7 +69,7 @@ class MainFragment : Fragment() {
         responseLiveData.observe(requireActivity(), Observer {
             when (responseLiveData.value) {
                 is ResultWrapper.Success -> {
-                    adapter.setList((responseLiveData.value as ResultWrapper.Success<List<PhotoModel>>).value)
+                    adapter.setList((responseLiveData.value as ResultWrapper.Success<List<PhotoPresentationModel>>).value)
                     adapter.notifyDataSetChanged()
                 }
                 is ResultWrapper.Error -> {

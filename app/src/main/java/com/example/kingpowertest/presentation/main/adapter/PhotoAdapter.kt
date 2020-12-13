@@ -12,19 +12,20 @@ import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.example.kingpowertest.R
-import com.example.kingpowertest.data.model.PhotoModel
+import com.example.kingpowertest.data.model.PhotoNetworkModel
 import com.example.kingpowertest.databinding.ItemListPhotoBinding
 import com.example.kingpowertest.presentation.main.fragment.MainFragmentDirections
+import com.example.kingpowertest.presentation.main.model.PhotoPresentationModel
 
 class PhotoAdapter :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private val photos = ArrayList<PhotoModel>()
+    private val photos = ArrayList<PhotoPresentationModel>()
 
 
-    fun setList(photoList:List<PhotoModel>){
+    fun setList(photoNetworkList:List<PhotoPresentationModel>){
         photos.clear()
-        photos.addAll(photoList)
+        photos.addAll(photoNetworkList)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -44,9 +45,9 @@ class PhotoAdapter :
     class PhotoViewHolder(private val binding: ItemListPhotoBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun binding(model:PhotoModel){
+        fun binding(networkModel:PhotoPresentationModel){
             Glide.with(binding.root.context)
-                .load(model.thumbnailUrl)
+                .load(networkModel.thumbnailUrl)
                 .error(R.color.colorBlack)
                 .placeholder(R.color.colorPrimary)
                 .listener(object:RequestListener<Drawable>{
@@ -81,10 +82,10 @@ class PhotoAdapter :
                 })
                 .into(binding.iv)
 
-            binding.tv.text = model.title
+            binding.tv.text = networkModel.title
             binding.root.setOnClickListener {
                 val action = MainFragmentDirections.actionMainFragmentToDetailFragment(
-                    model
+                    networkModel
                 )
                 it.findNavController().navigate(action)
             }

@@ -1,7 +1,7 @@
 package com.example.kingpowertest.data.api
 
 import com.example.kingpowertest.BuildConfig.BASE_URL
-import com.example.kingpowertest.data.model.PhotoModel
+import com.example.kingpowertest.data.model.PhotoNetworkModel
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -12,7 +12,7 @@ import retrofit2.http.Path
 interface KingPowerService {
 
     @GET("{albumId}/photos")
-    suspend fun getPhotos(@Path("albumId") albumId: Int): List<PhotoModel>
+    suspend fun getPhotos(@Path("albumId") albumId: Int): List<PhotoNetworkModel>
 
     companion object {
         val instance: KingPowerService by lazy {

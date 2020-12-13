@@ -13,8 +13,9 @@ import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.example.kingpowertest.R
-import com.example.kingpowertest.data.model.PhotoModel
+import com.example.kingpowertest.data.model.PhotoNetworkModel
 import com.example.kingpowertest.databinding.DetailFragmentBinding
+import com.example.kingpowertest.presentation.main.model.PhotoPresentationModel
 
 class DetailFragment : Fragment() {
 
@@ -23,13 +24,13 @@ class DetailFragment : Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
-    private lateinit var photoModel: PhotoModel
+    private lateinit var photoNetworkModel: PhotoPresentationModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let { arguments ->
             val args = DetailFragmentArgs.fromBundle(arguments)
-            photoModel = args.photoModel
+            photoNetworkModel = args.photoModel
         }
     }
 
@@ -55,7 +56,7 @@ class DetailFragment : Fragment() {
 
     private fun displayPhoto(){
         Glide.with(requireContext())
-            .load(photoModel.url)
+            .load(photoNetworkModel.url)
             .error(R.color.colorBlack)
             .placeholder(R.color.colorPrimary)
             .listener(object: RequestListener<Drawable> {

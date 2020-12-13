@@ -1,14 +1,12 @@
 package com.example.kingpowertest.presentation.di
 
-import com.example.kingpowertest.DI_NAME_GetPhotoUseCase
-import com.example.kingpowertest.DI_NAME_KingPowerService
-import com.example.kingpowertest.DI_NAME_PhotoRemoteDataSourceImpl
-import com.example.kingpowertest.DI_NAME_PhotoRepository
+import com.example.kingpowertest.*
 import com.example.kingpowertest.data.api.KingPowerService
 import com.example.kingpowertest.data.repository.PhotoRepositoryImpl
 import com.example.kingpowertest.data.repository.datasourceImpl.PhotoRemoteDataSourceImpl
 import com.example.kingpowertest.domain.repository.PhotoRepository
 import com.example.kingpowertest.domain.usecase.GetPhotoUseCase
+import com.example.kingpowertest.presentation.main.mapper.PhotoNetworkModelMapper
 import com.example.kingpowertest.presentation.main.viewmodel.MainFragmentViewModel
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.core.qualifier.named
@@ -32,7 +30,11 @@ val appModule = module {
         GetPhotoUseCase(get(named(DI_NAME_PhotoRepository)))
     }
 
+    single(named(DI_NAME_PhotoNetworkModelMapper))  {
+        PhotoNetworkModelMapper()
+    }
+
     viewModel {
-        MainFragmentViewModel(get(named(DI_NAME_GetPhotoUseCase)))
+        MainFragmentViewModel(get(named(DI_NAME_GetPhotoUseCase)),get(named(DI_NAME_PhotoNetworkModelMapper)))
     }
 }
