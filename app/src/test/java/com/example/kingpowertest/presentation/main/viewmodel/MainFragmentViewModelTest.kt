@@ -23,15 +23,15 @@ import org.mockito.Mockito.`when`
 @RunWith(AndroidJUnit4::class)
 class MainFragmentViewModelTest {
     private lateinit var viewModel: MainFragmentViewModel
-    private lateinit var fakeRepository: PhotoRepository
+    private lateinit var mockRepository: PhotoRepository
 
     @get:Rule
     val instantTaskExecutorRule = InstantTaskExecutorRule()
 
     @Before
     fun setUp() {
-        fakeRepository = Mockito.mock(PhotoRepository::class.java)
-        val getPhotoUseCase = GetPhotoUseCase(fakeRepository)
+        mockRepository = Mockito.mock(PhotoRepository::class.java)
+        val getPhotoUseCase = GetPhotoUseCase(mockRepository)
         viewModel = MainFragmentViewModel(getPhotoUseCase)
     }
 
@@ -42,7 +42,7 @@ class MainFragmentViewModelTest {
             PhotoNetworkModel(1, 2, "title2", "url2", "t_url2")
         )
         runBlocking {
-            `when`(fakeRepository.getPhotos(1)).thenReturn(mockList)
+            `when`(mockRepository.getPhotos(1)).thenReturn(mockList)
             val photosExpected = mutableListOf<PhotoPresentationModel>()
             photosExpected.add(PhotoPresentationModel("url1", "t_url1", "title1"))
             photosExpected.add(PhotoPresentationModel("url2", "t_url2", "title2"))
@@ -64,7 +64,7 @@ class MainFragmentViewModelTest {
     @Test
     fun fetchData_returnValueAsNull_Then_ShowMessageAs_FAILURE() {
         runBlocking {
-            `when`(fakeRepository.getPhotos(1)).thenReturn(null)
+            `when`(mockRepository.getPhotos(1)).thenReturn(null)
             viewModel.getPhotoByAlbumId(1)
             val currentList = viewModel.getPhotoListLiveData().getOrAwaitValue()
             when (currentList) {
@@ -82,7 +82,7 @@ class MainFragmentViewModelTest {
     @Test
     fun fetchData_ThrowsException_Then_CauseIsNotNull() {
         runBlocking {
-            `when`(fakeRepository.getPhotos(1)).thenThrow(RuntimeException())
+            `when`(mockRepository.getPhotos(1)).thenThrow(RuntimeException())
             viewModel.getPhotoByAlbumId(1)
             val currentList = viewModel.getPhotoListLiveData().getOrAwaitValue()
             when (currentList) {

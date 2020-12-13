@@ -52,10 +52,7 @@ class PhotoRepositoryImpl(
     suspend fun getPhotosFromAPI(albumId: Int): List<PhotoNetworkModel> {
         lateinit var photoList: List<PhotoNetworkModel>
         try {
-            val response = photoRemoteDataSource.getPhotos(albumId)
-            if(response!=null){
-                photoList = response
-            }
+            photoList = photoRemoteDataSource.getPhotos(albumId)
         } catch (exception: Exception) {
             Log.i("MyTag", exception.message.toString())
         }
