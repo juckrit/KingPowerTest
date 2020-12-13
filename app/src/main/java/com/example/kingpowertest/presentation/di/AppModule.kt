@@ -6,7 +6,6 @@ import com.example.kingpowertest.data.repository.PhotoRepositoryImpl
 import com.example.kingpowertest.data.repository.datasourceImpl.PhotoRemoteDataSourceImpl
 import com.example.kingpowertest.domain.repository.PhotoRepository
 import com.example.kingpowertest.domain.usecase.GetPhotoUseCase
-import com.example.kingpowertest.presentation.main.mapper.PhotoNetworkModelMapper
 import com.example.kingpowertest.presentation.main.viewmodel.MainFragmentViewModel
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
@@ -44,11 +43,8 @@ val appModule = module {
         GetPhotoUseCase(get(named(DI_NAME_PhotoRepository)))
     }
 
-    single(named(DI_NAME_PhotoNetworkModelMapper))  {
-        PhotoNetworkModelMapper()
-    }
 
     viewModel {
-        MainFragmentViewModel(get(named(DI_NAME_GetPhotoUseCase)),get(named(DI_NAME_PhotoNetworkModelMapper)))
+        MainFragmentViewModel(get(named(DI_NAME_GetPhotoUseCase)))
     }
 }
