@@ -34,14 +34,19 @@ class MainFragmentViewModel(
                 } else {
                     //Fail
                     photoListLiveData.postValue(ResultWrapper.Error(FAILURE, null))
+//                    photoListLiveData.postValue(ResultWrapper.Success(emptyList()))
+
                 }
             } catch (e: IOException) {
                 Log.d("TEST", e.message ?: "error")
                 photoListLiveData.postValue(ResultWrapper.Error(e.message ?: "", e))
+//                photoListLiveData.postValue(ResultWrapper.Success(emptyList()))
 
             } catch (e: Exception) {
                 Log.d("TEST", e.message ?: "error")
                 photoListLiveData.postValue(ResultWrapper.Error(FAILURE, e))
+//                photoListLiveData.postValue(ResultWrapper.Success(emptyList()))
+
 
             }
         }
